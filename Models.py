@@ -12,8 +12,9 @@ def signup(db:Database,user:SignUp):
         "email":user.email,
         "role":user.role,
         "password":hashed_password,
-        # "created_at":user.created_at,
-        # "updated_at":user.updated_at
+        "status":user.status,
+        "created_at":user.created_at,
+        "updated_at":user.updated_at
     }
     result=db["SignUp"].insert_one(signup_db)
     return {
