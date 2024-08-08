@@ -1,15 +1,14 @@
-from pydantic import BaseModel, EmailStr
-from datetime import datetime
-class SignUp(BaseModel):
-    firstname:str
-    lastname:str
-    email:EmailStr
-    role:str
-    password:str
-    status:bool=False
-    created_at:datetime=datetime.utcnow()
-    updated_at:datetime=datetime.utcnow()
+from mongoengine import *
+class SignUp(Document):
+    firstname=StringField(required=True)
+    lastname=StringField(required=True)
+    email=EmailField(required=True,unique=True)
+    role=StringField()
+    password=StringField()
+    status=BooleanField(required=True)
+    created_at=DateTimeField(required=True,auto_now_add=True)
+    updated_at=DateTimeField(required=True,auto_now=True)
 
-class Login(BaseModel):
-    email:EmailStr
-    password:str
+class Login(Document):
+    email=EmailField(required=True)
+    password=StringField(required=True)
